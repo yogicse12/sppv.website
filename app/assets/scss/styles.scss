@@ -1,3 +1,22 @@
-@use 'variables';
 @use 'common';
 
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply font-sans antialiased;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}
+
+* {
+  @apply transition-colors duration-200;
+}
+
+// Disable transitions during prefers-reduced-motion
+@media (prefers-reduced-motion: reduce) {
+  * {
+    @apply #{'!transition-none !duration-0'};
+  }
+}

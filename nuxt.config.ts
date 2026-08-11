@@ -18,6 +18,18 @@ export default defineNuxtConfig({
     '~/assets/scss/styles.scss'
   ],
 
+  vite: {
+    css: {
+      preprocessorOptions: {
+        scss: {
+          additionalData: `
+            @use "~/assets/scss/variables.scss";
+          `,
+        },
+      },
+    },
+  },
+
   tailwindcss: {
     cssPath: '~/assets/css/tailwind.css'
   },
@@ -54,7 +66,20 @@ export default defineNuxtConfig({
           rel: 'icon',
           type: 'image/x-icon',
           href: '/favicon.ico'
-        }
+        },
+        {
+          rel: 'preconnect',
+          href: 'https://fonts.googleapis.com',
+        },
+        {
+          rel: 'preconnect',
+          href: 'https://fonts.gstatic.com',
+          crossorigin: 'true',
+        },
+        {
+          rel: 'stylesheet',
+          href: 'https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap',
+        },
       ]
     }
   },
@@ -79,5 +104,9 @@ export default defineNuxtConfig({
     '/admin/**': {
       ssr: false
     }
+  },
+
+  features: {
+    inlineStyles: false,
   }
 })
