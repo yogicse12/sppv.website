@@ -30,6 +30,21 @@
         </ImageContent>
         <section class="bg-[#ededfd] py-20 sm:py-24 lg:py-32">
             <div class="mx-auto max-w-8xl px-5 sm:px-6 lg:px-8">
+                <div class="grid gap-10 lg:grid-cols-2 lg:gap-16 mb-16">
+                    <div>
+                        <span class="inline-flex items-center rounded-full bg-indigo-100 px-4 py-1.5 text-sm font-medium text-indigo-600">
+                            Our Services
+                        </span>
+                        <h2 class="mt-6 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+                            From compliance to complex advisory, SPPV delivers integrated business support.
+                        </h2>
+                    </div>
+                    <div class="flex flex-col gap-6 text-lg leading-relaxed text-slate-600">
+                        <p>Tax, accounting, audit and advisory are interconnected.</p>
+                        <p>A business decision can have tax consequences. A tax decision can affect cash flow. A transaction can change your reporting requirements.</p>
+                        <p>SPPV brings these perspectives together to provide practical, commercially aware advice.</p>
+                    </div>
+                </div>
                 <div class="grid items-center gap-2 lg:grid-cols-3 lg:gap-4">
                     <div v-for="(service, index) in services" :key="index">
                         <ServiceCard :title="service.title" :description="service.description" :image-src="service.imageSrc" :image-alt="service.imageAlt" :to="`/services/${service.slug}`" />
@@ -38,7 +53,7 @@
             </div>
         </section>
         <Testimonial
-            tagline="Client Stories"
+            tagline="Testimonials"
             title="What our clients say"
             :testimonials="testimonials"
         />

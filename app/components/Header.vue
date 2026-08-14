@@ -1,11 +1,9 @@
 <template>
   <header class="fixed inset-x-0 top-0 z-50">
-    <!-- Shell: transparent + flush on the home hero, floating white card everywhere else -->
+    <!-- Shell: transparent on the home hero, white once scrolled (or on any other page) -->
     <div
-      class="border transition-all duration-300"
-      :class="isFloating
-        ? 'mx-3 mt-3 rounded-2xl border-black/5 bg-white shadow-lg shadow-slate-900/10 sm:mx-4 sm:mt-4'
-        : 'mx-0 mt-0 rounded-none border-transparent bg-transparent shadow-none'"
+      class="transition-colors duration-300"
+      :class="isFloating ? 'bg-white' : 'bg-transparent'"
     >
       <div class="mx-auto flex h-14 sm:h-16 md:h-20 lg:h-[80px] max-w-8xl items-center justify-between px-5 sm:px-6 lg:px-8">
         <!-- Logo -->

@@ -53,7 +53,7 @@
                 class="h-14 w-14 rounded-full object-cover ring-1 ring-slate-200"
               >
 
-              <div class="text-center sm:text-left">
+              <div class="text-center sm:text-center">
                 <p class="font-semibold text-slate-900">
                   {{ active.name }}
                 </p>
