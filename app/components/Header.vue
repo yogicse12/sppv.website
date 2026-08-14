@@ -1,49 +1,70 @@
 <template>
-  <header class="sticky top-0 z-50 w-full border-b border-black/5 bg-white/80 backdrop-saturate-150 backdrop-blur-md">
-    <div class="mx-auto flex h-14 sm:h-16 md:h-20 lg:h-[88px] max-w-8xl items-center justify-between px-5 sm:px-6 lg:px-8">
-      <!-- Logo -->
-      <NuxtLink to="/" class="flex shrink-0 items-center text-lg font-semibold tracking-tight text-neutral-900" @click="closeMenu">
-        LOGO
-      </NuxtLink>
-
-      <!-- Desktop navigation -->
-      <nav class="hidden lg:flex lg:items-center lg:gap-10" aria-label="Primary">
+  <header class="fixed inset-x-0 top-0 z-50">
+    <!-- Shell: transparent + flush on the home hero, floating white card everywhere else -->
+    <div
+      class="border transition-all duration-300"
+      :class="isFloating
+        ? 'mx-3 mt-3 rounded-2xl border-black/5 bg-white shadow-lg shadow-slate-900/10 sm:mx-4 sm:mt-4'
+        : 'mx-0 mt-0 rounded-none border-transparent bg-transparent shadow-none'"
+    >
+      <div class="mx-auto flex h-14 sm:h-16 md:h-20 lg:h-[88px] max-w-8xl items-center justify-between px-5 sm:px-6 lg:px-8">
+        <!-- Logo -->
         <NuxtLink
-          v-for="link in navLinks"
-          :key="link.to"
-          :to="link.to"
-          class="nav-link relative py-2 text-[15px] font-medium text-neutral-600 transition-colors hover:text-neutral-900"
-          :class="{ 'text-neutral-900': isActive(link.to) }"
-          :aria-current="isActive(link.to) ? 'page' : undefined"
+          to="/"
+          class="flex shrink-0 items-center gap-2.5 text-lg font-semibold tracking-tight transition-colors"
+          :class="isFloating ? 'text-slate-900' : 'text-white'"
+          @click="closeMenu"
         >
-          {{ link.label }}
+          <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-indigo-500 to-blue-500 text-sm font-bold text-white">
+            S
+          </span>
+          SPPV
         </NuxtLink>
-      </nav>
 
-      <!-- Desktop CTA -->
-      <div class="hidden lg:flex lg:items-center">
-        <NuxtLink
-          to="/contact"
-          class="rounded-full bg-neutral-900 px-5 py-2.5 text-[14px] font-medium text-white transition-colors hover:bg-neutral-700"
+        <!-- Desktop navigation -->
+        <nav class="hidden lg:flex lg:items-center lg:gap-10" aria-label="Primary">
+          <NuxtLink
+            v-for="link in navLinks"
+            :key="link.to"
+            :to="link.to"
+            class="nav-link relative py-2 text-[15px] font-medium transition-colors"
+            :class="navLinkClasses(link.to)"
+            :aria-current="isActive(link.to) ? 'page' : undefined"
+          >
+            {{ link.label }}
+          </NuxtLink>
+        </nav>
+
+        <!-- Desktop CTA -->
+        <div class="hidden lg:flex lg:items-center">
+          <NuxtLink
+            to="/contact"
+            class="rounded-full bg-indigo-600 px-5 py-2.5 text-[14px] font-medium text-white transition-colors hover:bg-indigo-500"
+          >
+            Book a consultation
+          </NuxtLink>
+        </div>
+
+        <!-- Mobile menu toggle -->
+        <button
+          type="button"
+          class="hamburger inline-flex h-10 w-10 flex-col items-center justify-center gap-[5px] rounded-full transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 lg:hidden"
+          :class="[
+            isFloating
+              ? 'text-slate-900 hover:bg-black/5 focus-visible:outline-slate-900'
+              : 'text-white hover:bg-white/10 focus-visible:outline-white',
+            { 'is-open': isMenuOpen }
+          ]"
+          :aria-expanded="isMenuOpen"
+          aria-controls="mobile-nav"
+          :aria-label="isMenuOpen ? 'Close menu' : 'Open menu'"
+          @click="toggleMenu"
         >
-          Get in touch
-        </NuxtLink>
+          <span class="hamburger-bar" />
+          <span class="hamburger-bar" />
+          <span class="hamburger-bar" />
+        </button>
       </div>
-
-      <!-- Mobile menu toggle -->
-      <button
-        type="button"
-        class="hamburger inline-flex h-10 w-10 flex-col items-center justify-center gap-[5px] rounded-full text-neutral-900 transition-colors hover:bg-black/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-900 lg:hidden"
-        :class="{ 'is-open': isMenuOpen }"
-        :aria-expanded="isMenuOpen"
-        aria-controls="mobile-nav"
-        :aria-label="isMenuOpen ? 'Close menu' : 'Open menu'"
-        @click="toggleMenu"
-      >
-        <span class="hamburger-bar" />
-        <span class="hamburger-bar" />
-        <span class="hamburger-bar" />
-      </button>
     </div>
 
     <!-- Mobile navigation -->
@@ -51,15 +72,15 @@
       <nav
         v-if="isMenuOpen"
         id="mobile-nav"
-        class="border-t border-black/5 bg-white/95 backdrop-blur-md lg:hidden"
+        class="mx-3 mt-2 overflow-hidden rounded-2xl border border-black/5 bg-white shadow-lg sm:mx-4 lg:hidden"
         aria-label="Mobile"
       >
         <ul class="flex flex-col divide-y divide-black/5 px-5 sm:px-6">
           <li v-for="link in navLinks" :key="link.to">
             <NuxtLink
               :to="link.to"
-              class="block py-4 text-[17px] font-medium text-neutral-800"
-              :class="{ 'text-neutral-900': isActive(link.to) }"
+              class="block py-4 text-[17px] font-medium text-slate-800"
+              :class="{ 'text-slate-900': isActive(link.to) }"
               :aria-current="isActive(link.to) ? 'page' : undefined"
               @click="closeMenu"
             >
@@ -70,7 +91,7 @@
         <div class="px-5 pb-6 sm:px-6">
           <NuxtLink
             to="/contact"
-            class="block rounded-full bg-neutral-900 px-5 py-3 text-center text-[15px] font-medium text-white transition-colors hover:bg-neutral-700"
+            class="block rounded-full bg-indigo-600 px-5 py-3 text-center text-[15px] font-medium text-white transition-colors hover:bg-indigo-500"
             @click="closeMenu"
           >
             Get in touch
@@ -93,6 +114,33 @@ const navLinks = [
 ]
 
 const isMenuOpen = ref(false)
+
+// Only the home page ever shows the transparent overlay state (it has a
+// dark hero to sit over). Every other route — and the home page itself
+// once scrolled — uses the floating white card.
+const isHome = computed(() => route.path === '/')
+const scrolled = ref(false)
+const isFloating = computed(() => !isHome.value || scrolled.value)
+
+const SCROLL_THRESHOLD = 24
+
+function handleScroll () {
+  scrolled.value = window.scrollY > SCROLL_THRESHOLD
+}
+
+function navLinkClasses (to) {
+  const active = isActive(to)
+
+  if (isFloating.value) {
+    return active
+      ? 'text-slate-900'
+      : 'text-slate-600 hover:text-slate-900'
+  }
+
+  return active
+    ? 'text-white'
+    : 'text-white/75 hover:text-white'
+}
 
 function toggleMenu () {
   isMenuOpen.value = !isMenuOpen.value
@@ -126,11 +174,14 @@ function handleResize () {
 }
 
 onMounted(() => {
+  handleScroll()
+  window.addEventListener('scroll', handleScroll, { passive: true })
   window.addEventListener('keydown', handleKeydown)
   window.addEventListener('resize', handleResize)
 })
 
 onBeforeUnmount(() => {
+  window.removeEventListener('scroll', handleScroll)
   window.removeEventListener('keydown', handleKeydown)
   window.removeEventListener('resize', handleResize)
   if (import.meta.client) document.body.style.overflow = ''
