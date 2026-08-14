@@ -61,6 +61,9 @@ export default defineNuxtConfig({
         }
       ],
 
+      title: 'Home',
+      titleTemplate: '%s | SPPV & Co LLP',
+
       link: [
         {
           rel: 'icon',

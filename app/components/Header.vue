@@ -7,18 +7,14 @@
         ? 'mx-3 mt-3 rounded-2xl border-black/5 bg-white shadow-lg shadow-slate-900/10 sm:mx-4 sm:mt-4'
         : 'mx-0 mt-0 rounded-none border-transparent bg-transparent shadow-none'"
     >
-      <div class="mx-auto flex h-14 sm:h-16 md:h-20 lg:h-[88px] max-w-8xl items-center justify-between px-5 sm:px-6 lg:px-8">
+      <div class="mx-auto flex h-14 sm:h-16 md:h-20 lg:h-[80px] max-w-8xl items-center justify-between px-5 sm:px-6 lg:px-8">
         <!-- Logo -->
         <NuxtLink
           to="/"
-          class="flex shrink-0 items-center gap-2.5 text-lg font-semibold tracking-tight transition-colors"
-          :class="isFloating ? 'text-slate-900' : 'text-white'"
+          class="flex shrink-0 items-center"
           @click="closeMenu"
         >
-          <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-indigo-500 to-blue-500 text-sm font-bold text-white">
-            S
-          </span>
-          SPPV
+          <img :src="logoSrc" alt="SPPV & Co LLP" class="h-10 w-auto">
         </NuxtLink>
 
         <!-- Desktop navigation -->
@@ -122,6 +118,10 @@ const isHome = computed(() => route.path === '/')
 const scrolled = ref(false)
 const isFloating = computed(() => !isHome.value || scrolled.value)
 
+// Dark logo reads on the floating white card; light logo reads on the
+// transparent overlay over the dark hero.
+const logoSrc = computed(() => isFloating.value ? '/images/logo-dark.png' : '/images/logo-light.png')
+
 const SCROLL_THRESHOLD = 24
 
 function handleScroll () {
@@ -185,7 +185,7 @@ onBeforeUnmount(() => {
   window.removeEventListener('keydown', handleKeydown)
   window.removeEventListener('resize', handleResize)
   if (import.meta.client) document.body.style.overflow = ''
-})
+});
 </script>
 
 <style lang="scss" scoped>

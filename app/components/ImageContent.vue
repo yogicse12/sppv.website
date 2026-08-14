@@ -11,7 +11,7 @@
             {{ tagline }}
           </span>
 
-          <h2 class="mt-6 text-4xl font-bold leading-[1.15] tracking-tight text-slate-900 sm:text-5xl">
+          <h2 class="mt-6 text-3xl font-bold leading-[1.15] tracking-tight text-slate-900 sm:text-5xl">
             {{ title }}
           </h2>
 
