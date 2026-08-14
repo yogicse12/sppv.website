@@ -1,21 +1,10 @@
 <template>
   <div>
-    <section class="bg-slate-50 py-20 sm:py-24 lg:py-28">
-      <div class="mx-auto max-w-8xl px-5 text-center sm:px-6 lg:px-8">
-        <span class="inline-flex items-center rounded-full bg-indigo-100 px-4 py-1.5 text-sm font-medium text-indigo-600">
-          What we do
-        </span>
-
-        <h1 class="mt-6 text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl">
-          Services built around your business
-        </h1>
-
-        <p class="mx-auto mt-4 max-w-2xl text-lg text-slate-500">
-          Tax, accounting, audit and advisory support — technically sound,
-          practical, and aligned with your objectives.
-        </p>
-      </div>
-    </section>
+    <Hero
+      title="Services built around your business"
+      subtitle="Tax, accounting, audit and advisory support — technically sound, practical, and aligned with your objectives."
+      :secondary-cta="null"
+    />
 
     <section class="py-16 sm:py-20 lg:py-24">
       <div class="mx-auto grid max-w-8xl gap-8 px-5 sm:grid-cols-2 sm:px-6 lg:grid-cols-3 lg:px-8">
@@ -34,6 +23,16 @@
 </template>
 
 <script setup>
+useHead({
+  title: 'Services',
+  meta: [
+    {
+      name: 'description',
+      content: 'Tax, accounting, audit and advisory services from SPPV & Co LLP — technically sound, practical, and aligned with your objectives.'
+    }
+  ]
+})
+
 const services = [
   {
     slug: 'tax-advisory',

@@ -109,12 +109,12 @@ const navLinks = [
 
 const isMenuOpen = ref(false)
 
-// Only the home page ever shows the transparent overlay state (it has a
-// dark hero to sit over). Every other route — and the home page itself
-// once scrolled — uses the floating white card.
-const isHome = computed(() => route.path === '/')
+// Only routes with a dark Hero at the top ever show the transparent
+// overlay state. Every other route — and overlay routes themselves once
+// scrolled — use the floating white header.
+const hasOverlayHero = useHasOverlayHero()
 const scrolled = ref(false)
-const isFloating = computed(() => !isHome.value || scrolled.value)
+const isFloating = computed(() => !hasOverlayHero.value || scrolled.value)
 
 // Dark logo reads on the floating white card; light logo reads on the
 // transparent overlay over the dark hero.

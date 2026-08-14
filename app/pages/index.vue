@@ -45,7 +45,7 @@
                         <p>SPPV brings these perspectives together to provide practical, commercially aware advice.</p>
                     </div>
                 </div>
-                <div class="grid items-center gap-2 lg:grid-cols-3 lg:gap-4">
+                <div class="grid items-center gap-6 sm:grid-cols-2 sm:gap-8 lg:grid-cols-3">
                     <div v-for="(service, index) in services" :key="index">
                         <ServiceCard :title="service.title" :description="service.description" :image-src="service.imageSrc" :image-alt="service.imageAlt" :to="`/services/${service.slug}`" />
                     </div>

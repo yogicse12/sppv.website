@@ -79,10 +79,9 @@
     </div>
 
     <!-- Decorative brand mark, bleeding off the bottom edge -->
-    <div class="relative mt-4 h-24 select-none overflow-hidden sm:h-36 lg:h-48 text-center" aria-hidden="true">
+    <div class="relative mt-4 h-16 select-none overflow-hidden sm:h-36 lg:h-48 text-center" aria-hidden="true">
       <div class="absolute inset-x-0 bottom-[-0.35em] flex items-center justify-center gap-3 px-5 sm:justify-start sm:gap-4 sm:px-8 lg:px-12 text-center">
-        
-        <span class="text-[3rem] md:text-[5rem] font-black leading-none tracking-tight text-indigo-400/25 sm:text-[8rem] lg:text-[11rem] text-center mx-auto">
+        <span class="text-[2rem] font-black leading-none tracking-tight text-indigo-400/25 sm:text-[8rem] lg:text-[11rem] text-center mx-auto">
           SPPV & Co LLP
         </span>
       </div>
