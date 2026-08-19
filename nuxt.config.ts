@@ -7,12 +7,7 @@ export default defineNuxtConfig({
 
   ssr: true,
 
-  modules: [
-    '@nuxtjs/tailwindcss',
-    '@nuxt/image',
-    '@nuxtjs/sitemap',
-    '@nuxtjs/robots'
-  ],
+  modules: ['@nuxtjs/tailwindcss', '@nuxt/image', '@nuxtjs/sitemap', '@nuxtjs/robots'],
 
   css: [
     '~/assets/scss/styles.scss'

@@ -40,24 +40,22 @@
         v-if="primaryCta || secondaryCta"
         class="mt-4 flex flex-wrap items-center justify-center gap-4"
       >
-        <NuxtLink
+        <Button
           v-if="primaryCta"
           :to="primaryCta.to"
-          class="rounded-full bg-white px-7 py-3.5 text-[15px] font-medium text-indigo-700 shadow-sm transition-colors hover:bg-indigo-50"
+          variant="white"
         >
           {{ primaryCta.label }}
-        </NuxtLink>
+        </Button>
 
-        <NuxtLink
+        <Button
           v-if="secondaryCta"
           :to="secondaryCta.to"
-          class="inline-flex items-center gap-1.5 rounded-full bg-white/15 px-7 py-3.5 text-[15px] font-medium text-white backdrop-blur transition-colors hover:bg-white/25"
+          variant="ghost"
+          arrow
         >
           {{ secondaryCta.label }}
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" aria-hidden="true">
-            <polyline points="9 18 15 12 9 6" />
-          </svg>
-        </NuxtLink>
+        </Button>
       </div>
     </div>
   </section>
@@ -90,5 +88,5 @@ defineProps({
     type: null,
     default: () => ({ label: 'Our services', to: '/services' })
   }
-})
+});
 </script>

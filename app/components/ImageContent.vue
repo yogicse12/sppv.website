@@ -22,7 +22,7 @@
 
         <!-- Image column -->
         <div
-          class="aspect-[8/9] w-full overflow-hidden rounded-4xl"
+          class="aspect-[1/1] w-full overflow-hidden rounded-4xl"
           :class="reverse ? 'lg:order-1' : 'lg:order-2'"
         >
           <img
@@ -64,5 +64,5 @@ defineProps({
     type: Boolean,
     default: false
   }
-})
+});
 </script>
