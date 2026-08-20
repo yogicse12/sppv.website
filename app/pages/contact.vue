@@ -102,6 +102,10 @@
                   Thanks — we've received your message and will be in touch shortly.
                 </p>
               </div>
+
+              <p v-if="errorMessage" role="alert" class="text-[14px] font-medium text-red-600">
+                {{ errorMessage }}
+              </p>
             </form>
           </div>
 
@@ -164,23 +168,30 @@ const form = reactive({
 
 const submitting = ref(false)
 const submitted = ref(false)
+const errorMessage = ref('')
 
 async function handleSubmit () {
   submitting.value = true
   submitted.value = false
+  errorMessage.value = ''
 
-  // NOTE: this is not wired up to a real endpoint yet — there's no
-  // server route or email service configured. Swap this out for an
-  // actual API call once one exists.
-  await new Promise((resolve) => setTimeout(resolve, 500))
+  try {
+    await $fetch('/api/contact', {
+      method: 'POST',
+      body: { ...form }
+    })
 
-  submitting.value = false
-  submitted.value = true
+    submitted.value = true
 
-  form.name = ''
-  form.email = ''
-  form.phone = ''
-  form.service = ''
-  form.message = ''
+    form.name = ''
+    form.email = ''
+    form.phone = ''
+    form.service = ''
+    form.message = ''
+  } catch (error) {
+    errorMessage.value = error?.data?.statusMessage || 'Something went wrong. Please try again.'
+  } finally {
+    submitting.value = false
+  }
 }
 </script>

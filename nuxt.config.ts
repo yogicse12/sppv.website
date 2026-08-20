@@ -37,6 +37,11 @@ export default defineNuxtConfig({
   runtimeConfig: {
     apiSecret: '',
 
+    // Server-only — never exposed to the client bundle.
+    resendApiKey: process.env.RESEND_API_KEY || '',
+    emailFrom: process.env.EMAIL_FROM || '',
+    emailTo: process.env.EMAIL_TO || 'yogicse12@gmail.com',
+
     public: {
       siteUrl: '',
       siteName: ''
