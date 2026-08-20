@@ -25,7 +25,7 @@
         {{ tagline }}
       </span>
 
-      <h1 class="text-4xl font-semibold leading-[1.15] tracking-tight text-white sm:text-5xl lg:text-6xl">
+      <h1 class="text-4xl font-semibold leading-loose tracking-normal text-white sm:text-5xl lg:text-6xl">
         {{ title }}
       </h1>
 

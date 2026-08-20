@@ -25,7 +25,7 @@
                             Our Services
                         </span>
                         <h2 class="mt-6 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-                            From compliance to complex advisory, SPPV delivers integrated business support.
+                            Integrated advisory solutions designed around your financial, tax and business needs.
                         </h2>
                     </div>
                     <div class="flex flex-col gap-6 text-lg leading-relaxed text-slate-600">
@@ -34,10 +34,14 @@
                         <p>SPPV brings these perspectives together to provide practical, commercially aware advice.</p>
                     </div>
                 </div>
-                <div class="grid items-center gap-6 sm:grid-cols-2 sm:gap-8 lg:grid-cols-3">
-                    <div v-for="(service, index) in services" :key="index">
-                        <ServiceCard :title="service.title" :description="service.description" :image-src="service.imageSrc" :image-alt="service.imageAlt" :to="`/services/${service.slug}`" />
-                    </div>
+                <div class="grid gap-6 sm:grid-cols-2 sm:gap-8 lg:grid-cols-3">
+                    <CapabilityCard
+                        v-for="(service, index) in services"
+                        :key="index"
+                        :title="service.title"
+                        :image-src="service.imageSrc"
+                        :image-alt="service.imageAlt"
+                    />
                 </div>
             </div>
         </section>
@@ -73,40 +77,34 @@ const testimonials = [
 
 const services = [
     {
-        title: 'Tax Compliance',
-        description: 'We help clients manage income tax compliance accurately, efficiently, and within all applicable statutory deadlines.',
+        title: 'International Tax & Cross-Border Advisory',
         imageSrc: '/images/services/tax-compliance.jpg',
-        imageAlt: 'Tax Compliance'
+        imageAlt: 'International Tax & Cross-Border Advisory'
     },
     {
-        title: 'Corporate Tax',
-        description: 'We advise companies on tax implications arising from their operations, transactions, investments and business structures.',
+        title: 'Direct & Indirect Tax',
         imageSrc: '/images/services/corporate-tax.jpg',
-        imageAlt: 'Corporate Tax'
+        imageAlt: 'Direct & Indirect Tax'
     },
     {
-        title: 'Individual Tax',
-        description: 'We provide tax advice for professionals, business owners, investors and individuals with complex financial circumstances.',
+        title: 'Finance & Accounting Advisory',
         imageSrc: '/images/services/individual-tax.jpg',
-        imageAlt: 'Individual Tax'
+        imageAlt: 'Finance & Accounting Advisory'
     },
     {
-        title: 'Assessments & Notices',
-        description: 'When questions arise from the tax authorities, we help clients understand the issue, evaluate their position and prepare an appropriate response.',
+        title: 'Transaction & Business Advisory',
         imageSrc: '/images/services/assessments-notices.jpg',
-        imageAlt: 'Assessments & Notices'
+        imageAlt: 'Transaction & Business Advisory'
     },
     {
-        title: 'Capital Gains',
-        description: 'We advise clients on the tax implications associated with selling, transferring, restructuring, or disposing of assets and investments.',
+        title: 'Global Finance & Outsourcing',
         imageSrc: '/images/services/capital-gains.jpg',
-        imageAlt: 'Capital Gains'
+        imageAlt: 'Global Finance & Outsourcing'
     },
     {
-        title: 'Transaction Advisory',
-        description: 'Before a major transaction, we help identify potential tax implications so that tax considerations are incorporated into the decision—not discovered afterward.',
+        title: 'Regulatory & Corporate Advisory',
         imageSrc: '/images/services/transaction-advisory.jpg',
-        imageAlt: 'Transaction Advisory'
+        imageAlt: 'Regulatory & Corporate Advisory'
     },
-]
+];
 </script>
