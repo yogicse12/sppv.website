@@ -29,9 +29,12 @@
                         </h2>
                     </div>
                     <div class="flex flex-col gap-6 text-lg leading-relaxed text-slate-600">
-                        <p>Tax, accounting, audit and advisory are interconnected.</p>
-                        <p>A business decision can have tax consequences. A tax decision can affect cash flow. A transaction can change your reporting requirements.</p>
-                        <p>SPPV brings these perspectives together to provide practical, commercially aware advice.</p>
+                        <p>Tax, accounting, audit and advisory are interconnected.
+                        A business decision can have tax consequences. A tax decision can affect cash flow. A transaction can change your reporting requirements.
+                        SPPV brings these perspectives together to provide practical, commercially aware advice.</p>
+                        <div class="mt-4">
+                            <Button to="/services" :arrow="true">Know more</Button>
+                        </div>
                     </div>
                 </div>
                 <div class="grid gap-6 sm:grid-cols-2 sm:gap-8 lg:grid-cols-3">

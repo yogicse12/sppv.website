@@ -55,7 +55,32 @@
             Book a consultation
           </NuxtLink>
 
-          <div class="mt-8 flex items-center gap-3">
+          <div class="mt-6 flex flex-col gap-2.5 text-[14px] text-slate-600">
+            <p class="flex items-center gap-2.5">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 shrink-0 text-slate-400" aria-hidden="true">
+                <path d="M4 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L14 13l5 2v4a2 2 0 0 1-2 2A15 15 0 0 1 4 6a2 2 0 0 1 0-2Z" />
+              </svg>
+              <a href="tel:+919811635695" class="transition-colors hover:text-indigo-600">+91 9811635695</a>
+              <span aria-hidden="true" class="text-slate-300">/</span>
+              <a href="tel:+918655087696" class="transition-colors hover:text-indigo-600">+91 8655087696</a>
+            </p>
+            <p class="flex items-center gap-2.5">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 shrink-0 text-slate-400" aria-hidden="true">
+                <rect x="3" y="5" width="18" height="14" rx="2" />
+                <path d="m4 7 8 6 8-6" />
+              </svg>
+              <a href="mailto:sppv2026@outlook.com" class="transition-colors hover:text-indigo-600">sppv2026@outlook.com</a>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Divider -->
+      <div class="mt-16 border-t border-slate-900/10 pt-8 sm:mt-20 flex items-center justify-between gap-6 sm:flex-row">
+        <p class="text-[13px] text-slate-500">
+          &copy; {{ currentYear }} SPPV &amp; Co LLP. All rights reserved.
+        </p>
+        <div class="mt-8 flex items-center gap-3">
             <a
               v-for="social in socials"
               :key="social.label"
@@ -67,14 +92,6 @@
               v-html="social.icon"
             />
           </div>
-        </div>
-      </div>
-
-      <!-- Divider -->
-      <div class="mt-16 border-t border-slate-900/10 pt-8 sm:mt-20">
-        <p class="text-[13px] text-slate-500">
-          &copy; {{ currentYear }} SPPV &amp; Co LLP. All rights reserved.
-        </p>
       </div>
     </div>
 
@@ -93,12 +110,12 @@
 const currentYear = new Date().getFullYear()
 
 const services = [
-  { label: 'Tax Advisory', to: '/services/tax-advisory' },
-  { label: 'Accounting & Bookkeeping', to: '/services/accounting-bookkeeping' },
-  { label: 'Audit & Assurance', to: '/services/audit-assurance' },
-  { label: 'Business Advisory', to: '/services/business-advisory' },
-  { label: 'Compliance & Regulatory', to: '/services/compliance-regulatory' },
-  { label: 'Wealth & Estate Planning', to: '/services/wealth-estate-planning' }
+  { label: 'International Tax & Cross-Border Advisory', to: '/services/tax-advisory' },
+  { label: 'Direct & Indirect Tax', to: '/services/accounting-bookkeeping' },
+  { label: 'Finance & Accounting Advisory', to: '/services/audit-assurance' },
+  { label: 'Transaction & Business Advisory', to: '/services/business-advisory' },
+  { label: 'Global Finance & Outsourcing', to: '/services/compliance-regulatory' },
+  { label: 'Regulatory & Corporate Advisory', to: '/services/wealth-estate-planning' }
 ]
 
 const companyLinks = [
