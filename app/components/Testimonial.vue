@@ -1,92 +1,121 @@
 <template>
-  <section v-if="testimonials.length" class="bg-slate-50 py-20 sm:py-24 lg:py-32">
-    <div class="mx-auto max-w-5xl px-5 sm:px-6 lg:px-8">
-      <div v-if="tagline || title" class="mb-12 text-center sm:mb-16">
-        <span
-          v-if="tagline"
-          class="inline-flex items-center rounded-full bg-indigo-100 px-4 py-1.5 text-sm font-medium text-indigo-600"
-        >
+  <section v-if="testimonials.length" class="relative overflow-hidden bg-white py-20 sm:py-24 lg:py-32">
+    <div class="mx-auto max-w-8xl px-5 sm:px-6 lg:px-8">
+      <div v-if="tagline || title" class="max-w-xl text-center mx-auto">
+        <span v-if="tagline" class="inline-flex items-center rounded-full bg-indigo-100 px-4 py-1.5 text-sm font-medium text-indigo-600">
           {{ tagline }}
         </span>
-
         <h2
           v-if="title"
-          class="mt-6 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl"
+          class="mt-3 text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl lg:text-6xl"
         >
           {{ title }}
         </h2>
       </div>
+    </div>
 
+    <div
+      class="relative mt-14 flex flex-col gap-6 sm:mt-16"
+      role="region"
+      aria-label="Client testimonials"
+      @mouseenter="pause"
+      @mouseleave="resume"
+    >
+      <!-- Decorative dashed grid lines, behind the cards -->
       <div
-        ref="regionRef"
-        class="relative rounded-4xl bg-white p-10 shadow-sm ring-1 ring-slate-900/5 outline-none transition-shadow focus-visible:ring-2 focus-visible:ring-indigo-600 sm:p-14 lg:p-16"
-        role="region"
-        aria-roledescription="carousel"
-        aria-label="Client testimonials"
-        tabindex="0"
-        @mouseenter="pause"
-        @mouseleave="resume"
-        @keydown="onKeyDown"
-      >
-        <!-- Decorative quote mark -->
-        <svg
-          class="mx-auto h-9 w-9 text-indigo-100"
-          viewBox="0 0 24 24"
-          fill="currentColor"
-          aria-hidden="true"
-        >
-          <path d="M9.14 6.4C6.3 8.9 4.8 11.8 4.8 15.1c0 3.3 2 5.6 4.7 5.6 2.4 0 4.1-1.8 4.1-4.1 0-2.1-1.4-3.7-3.4-4 .4-2.1 1.8-4 3.8-5.3L9.14 6.4Zm9.7 0c-2.84 2.5-4.34 5.4-4.34 8.7 0 3.3 2 5.6 4.7 5.6 2.4 0 4.1-1.8 4.1-4.1 0-2.1-1.4-3.7-3.4-4 .4-2.1 1.8-4 3.8-5.3L18.84 6.4Z" />
-        </svg>
+        class="pointer-events-none absolute inset-0 hidden grid-cols-4 divide-x divide-dashed divide-slate-200 sm:grid lg:grid-cols-6"
+        aria-hidden="true"
+      />
 
-        <Transition name="fade-rise" mode="out-in">
-          <div :key="activeIndex" class="mt-6 text-center">
-            <p class="mx-auto max-w-3xl text-2xl font-medium leading-snug tracking-tight text-slate-900 sm:text-3xl">
-              &ldquo;{{ active.quote }}&rdquo;
+      <!-- Edge fade masks -->
+      <div class="pointer-events-none absolute inset-y-0 left-0 z-10 w-10 bg-gradient-to-r from-white to-transparent sm:w-24 lg:w-40" aria-hidden="true" />
+      <div class="pointer-events-none absolute inset-y-0 right-0 z-10 w-10 bg-gradient-to-l from-white to-transparent sm:w-24 lg:w-40" aria-hidden="true" />
+
+      <div class="marquee-row">
+        <div
+          class="marquee-track"
+          :class="{ 'is-paused': isPaused }"
+          :style="{ animationDuration: `${durationRowOne}s` }"
+        >
+          <div
+            v-for="(t, index) in rowOne"
+            :key="`row1-${index}`"
+            class="flex w-[300px] shrink-0 flex-col gap-6 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:w-[360px] sm:p-8 lg:w-[400px]"
+          >
+            <p class="text-[17px] leading-relaxed text-slate-800">
+              &ldquo;{{ t.quote }}&rdquo;
             </p>
 
-            <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <div class="mt-auto flex items-center gap-3">
               <img
-                v-if="active.avatar"
-                :src="active.avatar"
-                :alt="active.avatarAlt || active.name || ''"
+                v-if="t.avatar"
+                :src="t.avatar"
+                :alt="t.avatarAlt || t.name || ''"
                 loading="lazy"
-                class="h-14 w-14 rounded-full object-cover ring-1 ring-slate-200"
+                class="h-10 w-10 shrink-0 rounded-full object-cover ring-1 ring-slate-200"
               >
+              <div
+                v-else
+                class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-[13px] font-semibold"
+                :class="avatarColor(index)"
+              >
+                {{ initials(t.name) }}
+              </div>
 
-              <div class="text-center sm:text-center">
-                <p class="font-semibold text-slate-900">
-                  {{ active.name }}
+              <div>
+                <p class="text-[15px] font-semibold text-slate-900">
+                  {{ t.name }}
                 </p>
-                <p v-if="active.role || active.company" class="text-sm text-slate-500">
-                  {{ active.role }}<template v-if="active.role && active.company">, </template>{{ active.company }}
+                <p v-if="t.role || t.company" class="text-[13px] text-slate-500">
+                  {{ t.role }}<template v-if="t.role && t.company">, </template>{{ t.company }}
                 </p>
               </div>
             </div>
           </div>
-        </Transition>
-
-        <!-- Pagination -->
-        <div
-          v-if="testimonials.length > 1"
-          class="mt-10 flex items-center justify-center gap-2"
-          role="tablist"
-          aria-label="Testimonials"
-        >
-          <button
-            v-for="(t, index) in testimonials"
-            :key="index"
-            type="button"
-            class="h-2 rounded-full transition-all duration-300"
-            :class="index === activeIndex ? 'w-8 bg-indigo-600' : 'w-2 bg-slate-200 hover:bg-slate-300'"
-            role="tab"
-            :aria-selected="index === activeIndex"
-            :aria-label="`Go to testimonial ${index + 1}${t.name ? `: ${t.name}` : ''}`"
-            @click="goTo(index)"
-          />
         </div>
+      </div>
 
-        <div class="sr-only" aria-live="polite" aria-atomic="true">
-          Testimonial {{ activeIndex + 1 }} of {{ testimonials.length }}.
+      <div class="marquee-row">
+        <div
+          class="marquee-track"
+          :class="{ 'is-paused': isPaused }"
+          :style="{ animationDuration: `${durationRowTwo}s` }"
+        >
+          <div
+            v-for="(t, index) in rowTwo"
+            :key="`row2-${index}`"
+            class="flex w-[300px] shrink-0 flex-col gap-6 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:w-[360px] sm:p-8 lg:w-[400px]"
+          >
+            <p class="text-[17px] leading-relaxed text-slate-800">
+              &ldquo;{{ t.quote }}&rdquo;
+            </p>
+
+            <div class="mt-auto flex items-center gap-3">
+              <img
+                v-if="t.avatar"
+                :src="t.avatar"
+                :alt="t.avatarAlt || t.name || ''"
+                loading="lazy"
+                class="h-10 w-10 shrink-0 rounded-full object-cover ring-1 ring-slate-200"
+              >
+              <div
+                v-else
+                class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-[13px] font-semibold"
+                :class="avatarColor(index + 1)"
+              >
+                {{ initials(t.name) }}
+              </div>
+
+              <div>
+                <p class="text-[15px] font-semibold text-slate-900">
+                  {{ t.name }}
+                </p>
+                <p v-if="t.role || t.company" class="text-[13px] text-slate-500">
+                  {{ t.role }}<template v-if="t.role && t.company">, </template>{{ t.company }}
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -101,7 +130,7 @@
 */
 
 const props = defineProps({
-  // { quote, name, role, company, avatar, avatarAlt }[]
+  // { quote, name, role, company, avatar?, avatarAlt? }[]
   testimonials: {
     type: Array,
     default: () => []
@@ -117,146 +146,105 @@ const props = defineProps({
     default: ''
   },
 
-  autoplay: {
-    type: Boolean,
-    default: true
-  },
-
-  autoplayInterval: {
+  // Seconds for one full loop of a row — smaller is faster.
+  // Left null to auto-scale with the number of testimonials.
+  speed: {
     type: Number,
-    default: 6000
+    default: null
   }
 })
 
 /*
 |--------------------------------------------------------------------------
-| State
+| Rows — each duplicated so the marquee can loop seamlessly at -50%
 |--------------------------------------------------------------------------
 */
 
-const activeIndex = ref(0)
+const rowOne = computed(() => [...props.testimonials, ...props.testimonials])
+const rowTwo = computed(() => {
+  const reversed = [...props.testimonials].reverse()
+  return [...reversed, ...reversed]
+})
+
+const durationRowOne = computed(() => props.speed || Math.max(props.testimonials.length * 8, 20))
+const durationRowTwo = computed(() => props.speed || Math.max(props.testimonials.length * 9, 24))
+
+/*
+|--------------------------------------------------------------------------
+| Avatar helpers (initials instead of stock photos when none is provided)
+|--------------------------------------------------------------------------
+*/
+
+const AVATAR_COLORS = [
+  'bg-indigo-100 text-indigo-700',
+  'bg-emerald-100 text-emerald-700',
+  'bg-amber-100 text-amber-700',
+  'bg-sky-100 text-sky-700',
+  'bg-rose-100 text-rose-700'
+]
+
+function initials (name) {
+  if (!name) return ''
+
+  return name
+    .split(' ')
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((part) => part[0].toUpperCase())
+    .join('')
+}
+
+function avatarColor (index) {
+  return AVATAR_COLORS[index % AVATAR_COLORS.length]
+}
+
+/*
+|--------------------------------------------------------------------------
+| Pause on hover / focus
+|--------------------------------------------------------------------------
+*/
+
 const isPaused = ref(false)
-
-let timer = null
-
-const active = computed(() => props.testimonials[activeIndex.value] || {})
-
-/*
-|--------------------------------------------------------------------------
-| Navigation
-|--------------------------------------------------------------------------
-*/
-
-function goTo (index) {
-  const length = props.testimonials.length
-
-  if (!length) return
-
-  activeIndex.value = ((index % length) + length) % length
-
-  restartAutoplay()
-}
-
-function next () {
-  goTo(activeIndex.value + 1)
-}
-
-function previous () {
-  goTo(activeIndex.value - 1)
-}
-
-/*
-|--------------------------------------------------------------------------
-| Autoplay
-|--------------------------------------------------------------------------
-*/
-
-function startAutoplay () {
-  if (!props.autoplay || props.testimonials.length <= 1 || isPaused.value) return
-
-  clearAutoplay()
-
-  timer = setInterval(next, props.autoplayInterval)
-}
-
-function clearAutoplay () {
-  if (timer) {
-    clearInterval(timer)
-    timer = null
-  }
-}
-
-function restartAutoplay () {
-  clearAutoplay()
-
-  if (props.autoplay && !isPaused.value && props.testimonials.length > 1) {
-    startAutoplay()
-  }
-}
 
 function pause () {
   isPaused.value = true
-  clearAutoplay()
 }
 
 function resume () {
   isPaused.value = false
-  startAutoplay()
 }
-
-/*
-|--------------------------------------------------------------------------
-| Keyboard Navigation
-|--------------------------------------------------------------------------
-*/
-
-function onKeyDown (event) {
-  if (event.key === 'ArrowLeft') {
-    event.preventDefault()
-    previous()
-  } else if (event.key === 'ArrowRight') {
-    event.preventDefault()
-    next()
-  }
-}
-
-/*
-|--------------------------------------------------------------------------
-| Lifecycle
-|--------------------------------------------------------------------------
-*/
-
-onMounted(startAutoplay)
-onBeforeUnmount(clearAutoplay)
-
-watch(() => props.testimonials.length, (length) => {
-  if (!length) {
-    activeIndex.value = 0
-    clearAutoplay()
-    return
-  }
-
-  if (activeIndex.value >= length) {
-    activeIndex.value = length - 1
-  }
-
-  restartAutoplay()
-})
 </script>
 
 <style scoped>
-.fade-rise-enter-active,
-.fade-rise-leave-active {
-  transition: opacity 0.4s ease, transform 0.4s ease;
+.marquee-row {
+  overflow: hidden;
 }
 
-.fade-rise-enter-from {
-  opacity: 0;
-  transform: translateY(8px);
+.marquee-track {
+  display: flex;
+  width: max-content;
+  gap: 1.5rem;
+  animation-name: marquee-left;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
 }
 
-.fade-rise-leave-to {
-  opacity: 0;
-  transform: translateY(-8px);
+.marquee-track.is-paused {
+  animation-play-state: paused;
+}
+
+@keyframes marquee-left {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
 }
 </style>
