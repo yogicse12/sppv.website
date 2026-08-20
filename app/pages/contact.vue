@@ -144,12 +144,12 @@ useHead({
 })
 
 const services = [
-  'Tax Advisory',
-  'Accounting & Bookkeeping',
-  'Audit & Assurance',
-  'Business Advisory',
-  'Compliance & Regulatory',
-  'Wealth & Estate Planning'
+  'International Tax & Cross-Border Advisory',
+  'Direct & Indirect Tax',
+  'Finance & Accounting Advisory',
+  'Transaction & Business Advisory',
+  'Global Finance & Outsourcing',
+  'Regulatory & Corporate Advisory'
 ]
 
 const steps = [

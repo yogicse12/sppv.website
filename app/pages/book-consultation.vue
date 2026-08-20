@@ -437,12 +437,12 @@ useHead({
 })
 
 const services = [
-  'Tax Advisory',
-  'Accounting & Bookkeeping',
-  'Audit & Assurance',
-  'Business Advisory',
-  'Compliance & Regulatory',
-  'Wealth & Estate Planning'
+  'International Tax & Cross-Border Advisory',
+  'Direct & Indirect Tax',
+  'Finance & Accounting Advisory',
+  'Transaction & Business Advisory',
+  'Global Finance & Outsourcing',
+  'Regulatory & Corporate Advisory'
 ]
 
 const timeSlots = ['9:00 AM', '10:00 AM', '11:00 AM', '12:00 PM', '1:00 PM', '2:00 PM', '3:00 PM', '4:00 PM', '5:00 PM']
