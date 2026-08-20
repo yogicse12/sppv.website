@@ -32,7 +32,7 @@
         <!-- Desktop CTA -->
         <div class="hidden lg:flex lg:items-center">
           <NuxtLink
-            to="/contact"
+            to="/book-consultation"
             class="rounded-full bg-indigo-600 px-5 py-2.5 text-[14px] font-medium text-white transition-colors hover:bg-indigo-500"
           >
             Book a consultation

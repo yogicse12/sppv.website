@@ -81,7 +81,7 @@ defineProps({
   // { label, to } — pass `null` to hide either button
   primaryCta: {
     type: null,
-    default: () => ({ label: 'Book a consultation', to: '/contact' })
+    default: () => ({ label: 'Book a consultation', to: '/book-consultation' })
   },
 
   secondaryCta: {

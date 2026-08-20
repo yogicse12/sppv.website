@@ -49,7 +49,7 @@
             We'd be glad to hear from you.
           </p>
           <NuxtLink
-            to="/contact"
+            to="/book-consultation"
             class="mt-6 inline-flex items-center rounded-full bg-indigo-600 px-6 py-3 text-[14px] font-medium text-white transition-colors hover:bg-indigo-500"
           >
             Book a consultation
