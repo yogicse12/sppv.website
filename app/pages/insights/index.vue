@@ -1,8 +1,8 @@
 <template>
   <div>
     <Hero
-      title="Insights on tax, accounting, and running a business"
-      subtitle="Practical notes and updates from the SPPV team — for when you want more than just compliance."
+      title="Insights on Tax, Finance & Business Advisory"
+      subtitle="Practical perspectives from the SPPV team on international tax, FEMA and cross-border transactions, GST and direct tax, finance and CFO advisory, start-ups and business structuring, M&A, and how AI and automation are transforming finance."
       :primary-cta="null"
       :secondary-cta="null"
     />
@@ -18,7 +18,7 @@
           :category="featured.category"
           :date="featured.date"
           :read-time="featured.readTime"
-          :to="`/blog/${featured.slug}`"
+          :to="`/insights/${featured.slug}`"
         />
       </div>
     </section>
@@ -54,7 +54,7 @@
             :category="post.category"
             :date="post.date"
             :read-time="post.readTime"
-            :to="`/blog/${post.slug}`"
+            :to="`/insights/${post.slug}`"
           />
         </div>
 
@@ -68,7 +68,7 @@
 
 <script setup>
 useHead({
-  title: 'Blog',
+  title: 'Insights',
   meta: [
     {
       name: 'description',

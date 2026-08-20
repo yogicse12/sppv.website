@@ -5,13 +5,13 @@
       <section class="bg-white pb-10 pt-12 sm:pt-16">
         <div class="mx-auto max-w-3xl px-5 sm:px-6 lg:px-8">
           <NuxtLink
-            to="/blog"
+            to="/insights"
             class="inline-flex items-center gap-1.5 text-sm font-medium text-slate-500 transition-colors hover:text-indigo-600"
           >
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" aria-hidden="true">
               <polyline points="15 18 9 12 15 6" />
             </svg>
-            Back to blog
+            Back to insights
           </NuxtLink>
 
           <span class="mt-6 inline-flex w-fit items-center rounded-full bg-indigo-100 px-3 py-1 text-xs font-medium text-indigo-600">
@@ -71,11 +71,11 @@
         </div>
       </section>
 
-      <!-- More from the blog -->
+      <!-- More from Insights -->
       <section v-if="relatedPosts.length" class="bg-[#ededfd] py-20 sm:py-24 lg:py-28">
         <div class="mx-auto max-w-8xl px-5 sm:px-6 lg:px-8">
           <h2 class="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">
-            More from the blog
+            More from Insights
           </h2>
 
           <div class="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
@@ -89,7 +89,7 @@
               :category="related.category"
               :date="related.date"
               :read-time="related.readTime"
-              :to="`/blog/${related.slug}`"
+              :to="`/insights/${related.slug}`"
             />
           </div>
         </div>
@@ -122,10 +122,10 @@
           We couldn't find the article you were looking for.
         </p>
         <NuxtLink
-          to="/blog"
+          to="/insights"
           class="mt-8 inline-flex items-center rounded-full bg-indigo-600 px-7 py-3.5 text-[15px] font-medium text-white transition-colors hover:bg-indigo-500"
         >
-          Back to blog
+          Back to insights
         </NuxtLink>
       </div>
     </section>

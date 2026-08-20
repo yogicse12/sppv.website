@@ -1,28 +1,38 @@
 <template>
   <div>
     <Hero
-      title="Services built around your business"
-      subtitle="Tax, accounting, audit and advisory support — technically sound, practical, and aligned with your objectives."
+      title="Integrated Advisory Solutions"
+      subtitle="We provide integrated advisory solutions across taxation, finance, regulatory compliance, cross-border transactions and business strategy. Our services are designed to address complex financial and business requirements, helping organisations and individuals manage risk, improve efficiency, maintain compliance and make confident, commercially informed decisions for sustainable growth."
       :secondary-cta="null"
     />
 
-    <section class="py-16 sm:py-20 lg:py-24">
-      <div class="mx-auto grid max-w-8xl gap-8 px-5 sm:grid-cols-2 sm:px-6 lg:grid-cols-3 lg:px-8">
-        <ServiceCard
-          v-for="service in services"
-          :key="service.slug"
-          :title="service.title"
-          :description="service.description"
-          :image-src="service.image"
-          :image-alt="service.title"
-          :to="`/services/${service.slug}`"
-        />
-      </div>
-    </section>
+    <ImageContent
+      v-for="(category, index) in serviceCategories"
+      :id="category.slug"
+      :key="category.title"
+      :tagline="category.tagline"
+      :title="category.title"
+      :image-src="category.image"
+      :image-alt="category.title"
+      :reverse="index % 2 === 1"
+      spacing="compact"
+      class="scroll-mt-24 sm:scroll-mt-28"
+    >
+      <template #details>
+        <ul class="flex flex-col divide-y divide-slate-200">
+          <li v-for="item in category.items" :key="item" class="flex gap-3 py-4 first:pt-0 last:pb-0">
+            <Check class="mt-0.5 h-5 w-5 shrink-0 text-indigo-600" aria-hidden="true" />
+            <span>{{ item }}</span>
+          </li>
+        </ul>
+      </template>
+    </ImageContent>
   </div>
 </template>
 
 <script setup>
+import { Check } from '@lucide/vue'
+
 useHead({
   title: 'Services',
   meta: [
@@ -33,42 +43,88 @@ useHead({
   ]
 })
 
-const services = [
+const serviceCategories = [
   {
-    slug: 'tax-advisory',
-    title: 'Tax Advisory',
-    description: 'Strategic tax planning and compliance support that keeps you ahead of regulatory change and protects your bottom line.',
-    image: '/images/finance.jpg'
+    slug: 'international-tax-cross-border-advisory',
+    tagline: '01',
+    title: 'International Tax & Cross-Border Advisory',
+    image: '/images/services/fema-cross-border.jpg',
+    items: [
+      'International Taxation',
+      'Cross-Border Transaction Structuring',
+      'FEMA Advisory & Compliance',
+      'FDI / ODI Advisory',
+      'NRI Taxation & Repatriation',
+      'Transfer Pricing Advisory'
+    ]
   },
   {
-    slug: 'accounting-bookkeeping',
-    title: 'Accounting & Bookkeeping',
-    description: 'Accurate, timely books and management accounts so you always know exactly where your business stands.',
-    image: '/images/image-1.jpg'
+    slug: 'direct-indirect-tax',
+    tagline: '02',
+    title: 'Direct & Indirect Tax',
+    image: '/images/services/individual-tax.jpg',
+    items: [
+      'Corporate & Individual Taxation',
+      'Tax Advisory & Compliance',
+      'Income-Tax Assessments & Litigation Support',
+      'Capital Gains & Transaction Advisory',
+      'GST Advisory & Compliance',
+      'GST Registrations & Returns',
+      'Input Tax Credit Reviews',
+      'GST Assessments, Notices & Litigation Support'
+    ]
   },
   {
-    slug: 'audit-assurance',
-    title: 'Audit & Assurance',
-    description: 'Independent audit and assurance services that build confidence with stakeholders, lenders, and regulators.',
-    image: '/images/image-2.jpg'
+    slug: 'finance-accounting-advisory',
+    tagline: '03',
+    title: 'Finance & Accounting Advisory',
+    image: '/images/services/assessments-notices.jpg',
+    items: [
+      'Accounting & Bookkeeping',
+      'Virtual / Outsourced CFO Support',
+      'Management Reporting & MIS',
+      'Financial Planning & Analysis',
+      'Project & Profitability Reporting',
+      'Finance Function Transformation'
+    ]
   },
   {
-    slug: 'business-advisory',
-    title: 'Business Advisory',
-    description: 'Practical, commercially minded advice on structuring, growth, and the decisions that matter most.',
-    image: '/images/finance.jpg'
+    slug: 'transaction-business-advisory',
+    tagline: '04',
+    title: 'Transaction & Business Advisory',
+    image: '/images/services/transaction-advisory.jpg',
+    items: [
+      'Due Diligence',
+      'Valuation Support',
+      'M&A & Transaction Support',
+      'Business Structuring',
+      'Start-up & Founder Advisory'
+    ]
   },
   {
-    slug: 'compliance-regulatory',
-    title: 'Compliance & Regulatory',
-    description: 'Stay compliant with evolving statutory requirements without losing focus on running your business.',
-    image: '/images/image-1.jpg'
+    slug: 'global-finance-outsourcing',
+    tagline: '05',
+    title: 'Global Finance & Outsourcing',
+    image: '/images/services/global-finance-operations.jpg',
+    items: [
+      'Offshore Accounting Support',
+      'Finance Operations',
+      'Global Bookkeeping',
+      'Process Optimisation & Automation',
+      'Management Dashboards & Analytics'
+    ]
   },
   {
-    slug: 'wealth-estate-planning',
-    title: 'Wealth & Estate Planning',
-    description: "Long-term planning that protects what you've built and prepares it for the next generation.",
-    image: '/images/image-2.jpg'
+    slug: 'regulatory-corporate-advisory',
+    tagline: '06',
+    title: 'Regulatory & Corporate Advisory',
+    image: '/images/services/corporate-tax.jpg',
+    items: [
+      'Companies Act Advisory',
+      'Regulatory Compliance',
+      'Entity Setup & Structuring',
+      'Business & Commercial Advisory'
+    ]
   }
 ]
 </script>

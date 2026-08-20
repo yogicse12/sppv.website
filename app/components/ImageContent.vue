@@ -1,5 +1,5 @@
 <template>
-  <section class="bg-[#ffffff] py-20 sm:py-24 lg:py-32">
+  <section class="bg-[#ffffff]" :class="spacing === 'compact' ? 'py-10 sm:py-12 lg:py-16' : 'py-20 sm:py-24 lg:py-32'">
     <div class="mx-auto max-w-8xl px-5 sm:px-6 lg:px-8">
       <div class="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
         <!-- Text column -->
@@ -63,6 +63,14 @@ defineProps({
   reverse: {
     type: Boolean,
     default: false
+  },
+
+  // 'default' | 'compact' — use 'compact' when several of these are
+  // stacked back-to-back (e.g. the services page) so they don't each
+  // carry a full section's worth of breathing room.
+  spacing: {
+    type: String,
+    default: 'default'
   }
 });
 </script>

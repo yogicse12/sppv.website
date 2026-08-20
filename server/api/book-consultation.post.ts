@@ -23,27 +23,25 @@ export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig()
   const resend = useResend()
 
-  const lines = [
-    `Name: ${firstName} ${lastName}`,
-    `Email: ${email}`,
-    `Phone: ${phone}`,
-    company ? `Company: ${company}` : null,
-    `Service: ${service}`,
-    `Preferred date: ${preferredDate}`,
-    `Preferred time: ${preferredTime}`,
-    format ? `Format: ${format}` : null,
-    howHeard ? `Heard about us via: ${howHeard}` : null,
-    message ? '' : null,
-    message ? 'Message:' : null,
-    message || null
-  ].filter((line) => line !== null).join('\n')
+  const { text, html } = renderEmailBody([
+    { label: 'Name', value: `${firstName} ${lastName}` },
+    { label: 'Email', value: email },
+    { label: 'Phone', value: phone },
+    company ? { label: 'Company', value: company } : null,
+    { label: 'Service', value: service },
+    { label: 'Preferred date', value: preferredDate },
+    { label: 'Preferred time', value: preferredTime },
+    format ? { label: 'Format', value: format } : null,
+    howHeard ? { label: 'Heard about us via', value: howHeard } : null
+  ], message)
 
   const { error } = await resend.emails.send({
     from: config.emailFrom,
     to: config.emailTo,
     replyTo: email,
     subject: `New consultation request from ${firstName} ${lastName}`,
-    text: lines
+    text,
+    html
   })
 
   if (error) {

@@ -90,7 +90,7 @@ defineProps({
     default: ''
   },
 
-  // Route to the post's detail page, e.g. `/blog/capital-gains-planning-questions`
+  // Route to the post's detail page, e.g. `/insights/capital-gains-planning-questions`
   to: {
     type: String,
     required: true

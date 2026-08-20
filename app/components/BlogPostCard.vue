@@ -73,7 +73,7 @@ defineProps({
     default: ''
   },
 
-  // Route to the post's detail page, e.g. `/blog/understanding-input-tax-credit`
+  // Route to the post's detail page, e.g. `/insights/understanding-input-tax-credit`
   to: {
     type: String,
     required: true

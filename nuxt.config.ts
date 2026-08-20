@@ -100,7 +100,7 @@ export default defineNuxtConfig({
       swr: 3600
     },
 
-    '/blog/**': {
+    '/insights/**': {
       isr: 3600
     },
 

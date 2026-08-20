@@ -110,18 +110,18 @@
 const currentYear = new Date().getFullYear()
 
 const services = [
-  { label: 'International Tax & Cross-Border Advisory', to: '/services/tax-advisory' },
-  { label: 'Direct & Indirect Tax', to: '/services/accounting-bookkeeping' },
-  { label: 'Finance & Accounting Advisory', to: '/services/audit-assurance' },
-  { label: 'Transaction & Business Advisory', to: '/services/business-advisory' },
-  { label: 'Global Finance & Outsourcing', to: '/services/compliance-regulatory' },
-  { label: 'Regulatory & Corporate Advisory', to: '/services/wealth-estate-planning' }
+  { label: 'International Tax & Cross-Border Advisory', to: '/services#international-tax-cross-border-advisory' },
+  { label: 'Direct & Indirect Tax', to: '/services#direct-indirect-tax' },
+  { label: 'Finance & Accounting Advisory', to: '/services#finance-accounting-advisory' },
+  { label: 'Transaction & Business Advisory', to: '/services#transaction-business-advisory' },
+  { label: 'Global Finance & Outsourcing', to: '/services#global-finance-outsourcing' },
+  { label: 'Regulatory & Corporate Advisory', to: '/services#regulatory-corporate-advisory' }
 ]
 
 const companyLinks = [
   { label: 'Home', to: '/' },
   { label: 'About Us', to: '/about' },
-  { label: 'Blog', to: '/blog' },
+  { label: 'Insights', to: '/insights' },
   { label: 'Contact', to: '/contact' }
 ]
 
